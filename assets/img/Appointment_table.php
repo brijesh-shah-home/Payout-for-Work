@@ -66,19 +66,22 @@
             <!-- Boxes section -->
             <div class="container mx-auto px-4">
                 <div class="flex flex-wrap mt-4">
-                    <!-- Box 4: Feedback -->
-                    <div class="w-full md:w-1/2 xl:w-1/4 p-4 hidden" id="feedback">
+                    <!-- Box 4: Appointment History -->
+                    <div class="w-full md:w-1/2 xl:w-1/4 p-4 hidden" id="appointment">
                         <div class="border border-gray-200 rounded p-6 bg-white">
-                            <a href="#" id="showFeedback" class="text-xl font-semibold text-pink-600">Feedback</a>
+                        <a href="#" id="showAppointment" class="text-xl font-semibold text-pink-600 hover:text-pink-700 transition duration-300">Appointment History</a>
+
                         </div>
-                        <!-- Feedback Information Table -->
+                        <!-- Appointment History Information Table -->
                         <div class="w-full md:w-1/2 xl:w-3/4 p-4">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Message</th>
+                                        <th>Worker Name</th>
+                                        <th>Profession</th>
+                                        <th>Appointment Date</th>
+                                        <th>Client Name</th>
+                                        <th>Your Address</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,13 +90,15 @@
                                         if (!$con) {
                                             exit("Database Not Connected !");
                                         }   
-                                        $q = "select * from feedback";
+                                        $q = "select * from appointment_history";
                                         $res = mysqli_query($con, $q);
-                                        while ($row = mysqli_fetch_object($res)) { ?>
+                                        while ($row = mysqli_fetch_assoc($res)) { ?>
                                     <tr>
-                                        <td><?php echo $row->name; ?></td>
-                                        <td><?php echo $row->email; ?></td>
-                                        <td><?php echo $row->message; ?></td>
+                                        <td><?php echo $row['worker_name']; ?></td>
+                                        <td><?php echo $row['profession']; ?></td>
+                                        <td><?php echo $row['appointment_date']; ?></td>
+                                        <td><?php echo $row['client_name']; ?></td>
+                                        <td><?php echo $row['your_address']; ?></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>
@@ -103,13 +108,12 @@
                 </div>
             </div>
         </div>
-
     </div>
     </div>
     <script>
         $(document).ready(function () {
-            // Show user data when "Users" link is clicked            
-            $("#feedback").slideDown("slow");
+            // Show appointment history when "Appointment History" link is clicked            
+            $("#appointment").slideDown("slow");
         });      
     </script>
 </body>

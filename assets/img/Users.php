@@ -7,7 +7,6 @@
     <meta name="theme-color" content="#000000" />
     <link rel="shortcut icon" href="../img/rate.png" />
     <link rel="apple-touch-icon" sizes="76x76" href="../img/rate.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
     <link rel="stylesheet" href="../../assets/styles/tailwind.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -62,23 +61,22 @@
     <div id="root">
         <?php include('./adminnav.php'); ?>
         <!-- Header -->
-        <div class="relative bg-blue-800 md:pt-32 pb-32 pt-12">
+        <div class="relative bg-blue-900 md:pt-32 pb-32 pt-12">
             <!-- Boxes section -->
             <div class="container mx-auto px-4">
                 <div class="flex flex-wrap mt-4">
-                    <!-- Box 4: Feedback -->
-                    <div class="w-full md:w-1/2 xl:w-1/4 p-4 hidden" id="feedback">
+                    <!-- Box 1: Users -->
+                    <div class="w-full md:w-1/2 xl:w-1/4 p-4 hidden" id="userdata">
                         <div class="border border-gray-200 rounded p-6 bg-white">
-                            <a href="#" id="showFeedback" class="text-xl font-semibold text-pink-600">Feedback</a>
+                            <a href="#" id="showUsers" class="text-xl font-semibold text-pink-600">Users</a>
                         </div>
-                        <!-- Feedback Information Table -->
-                        <div class="w-full md:w-1/2 xl:w-3/4 p-4">
+                        <!-- User Information Table -->
+                        <div id="userData" class="w-full md:w-1/2 xl:w-3/4 p-4">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Username</th>
                                         <th>Email</th>
-                                        <th>Message</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,13 +85,12 @@
                                         if (!$con) {
                                             exit("Database Not Connected !");
                                         }   
-                                        $q = "select * from feedback";
+                                        $q = "select * from userdata";
                                         $res = mysqli_query($con, $q);
                                         while ($row = mysqli_fetch_object($res)) { ?>
                                     <tr>
-                                        <td><?php echo $row->name; ?></td>
+                                        <td><?php echo $row->username; ?></td>
                                         <td><?php echo $row->email; ?></td>
-                                        <td><?php echo $row->message; ?></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>
@@ -109,7 +106,7 @@
     <script>
         $(document).ready(function () {
             // Show user data when "Users" link is clicked            
-            $("#feedback").slideDown("slow");
+            $("#userdata").slideDown("slow");
         });      
     </script>
 </body>
